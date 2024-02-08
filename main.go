@@ -4,18 +4,21 @@ import (
 	"fmt"
 	"modevsty/go/letteravatar/inputpicker"
 	"modevsty/go/letteravatar/letteravatarapi"
+	"strconv"
 	"strings"
 )
 
 func main() {
 	var (
-		name, bgcolor, shape, format string
+		name, bgcolor, shape, format, sizeString string
+		size                                     int
 	)
 
 	pickers := []inputpicker.Pickable{
 		inputpicker.NamePicker{},
 		inputpicker.ColorPicker{},
 		inputpicker.ShapePicker{},
+		inputpicker.SizePicker{},
 		inputpicker.FormatPicker{},
 	}
 
@@ -39,12 +42,15 @@ func main() {
 			bgcolor = input
 		case inputpicker.ShapePicker:
 			shape = input
+		case inputpicker.SizePicker:
+			sizeString = input
+			size, _ = strconv.Atoi(sizeString)
 		case inputpicker.FormatPicker:
 			format = input
 		}
 	}
 
-	la := letteravatarapi.NewLetterAvatar(name).WithShape(shape).WithColor(bgcolor, "#fff")
+	la := letteravatarapi.NewLetterAvatar(name).WithShape(shape).WithColor(bgcolor, "#fff").WithSize(size)
 	saveAs := fmt.Sprintf("%s.%s", strings.ToLower(strings.Replace(name, " ", "-", -1)), format)
 	la.SaveAs(saveAs)
 	fmt.Printf("Avatar generated successfully at %s!\n", saveAs)

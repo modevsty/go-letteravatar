@@ -1,13 +1,13 @@
 # Letter Avatar Generator
 
 ## Introduction
-The Letter Avatar Generator is a Go application designed to create personalized avatars using the first letter of a user's name. In this version, users have the flexibility to choose background colors, avatar shapes, and the file format for saving the generated avatar. This project utilizes the `letteravatarapi` custom package for generating images with a letter set against a customizable background, making it ideal for creating unique avatars for various online platforms.
+The Letter Avatar Generator is a Go application designed to create personalized avatars using the first letter of a user's name. Users have the flexibility to choose background colors, avatar shapes, size and the file format for saving the generated avatar. This project utilizes the `letteravatarapi` custom package for generating images with a letter set against a customizable background, making it ideal for creating unique avatars for various online platforms.
 
 ## Features
-- Selection of background color (options: Magenta, Green, Blue).
-- Choice of avatar shape (Circle or Square).
-- Options for saving the avatar in different formats (PNG or JPG).
-- Customizable avatar size and color settings.
+- Users can choose a background color from predefined options.
+- Shape selection allows for either a circle or square avatar.
+- Size customization enables specifying the avatar dimension within a range.
+- Supports saving the avatar in either PNG or JPG formats.
 
 ## Requirements
 - Go (version 1.15 or newer is recommended)
@@ -43,6 +43,7 @@ The application will guide you through a series of prompts:
 1. Enter Your Name: Input your first and last name only.
 2. Pick a Background Color: Choose from the list by entering the corresponding number.
 3. Pick a Shape: Select your preferred shape for the avatar.
+4. Pick a Size: Specify the avatar's size (in pixels), which must be between 16 and 1024.
 4. Pick a Save Format: Choose between PNG or JPG formats for your avatar.
 5. After these selections, the program generates your avatar according to your specifications and saves it in the current directory.
 
