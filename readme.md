@@ -1,13 +1,13 @@
 # Letter Avatar Generator
 
 ## Introduction
-The Letter Avatar Generator is a Go application that creates personalized avatars using the first letter of a user's name. Users can choose a background color and avatar shape before generating their avatar. This project makes use of the `letteravatarapi` custom package for generating an image with a letter set against a customizable background. It's perfect for creating unique avatars for profiles, forums, or any platform that supports personalized images.
+The Letter Avatar Generator is a Go application designed to create personalized avatars using the first letter of a user's name. In this version, users have the flexibility to choose background colors, avatar shapes, and the file format for saving the generated avatar. This project utilizes the `letteravatarapi` custom package for generating images with a letter set against a customizable background, making it ideal for creating unique avatars for various online platforms.
 
 ## Features
-- Allows users to choose a background color (Magenta, Green, Blue).
-- Users can select an avatar shape (Circle or Square).
-- Generates avatars with customizable size and color settings.
-- Saves the avatar in PNG format.
+- Selection of background color (options: Magenta, Green, Blue).
+- Choice of avatar shape (Circle or Square).
+- Options for saving the avatar in different formats (PNG or JPG).
+- Customizable avatar size and color settings.
 
 ## Requirements
 - Go (version 1.15 or newer is recommended)
@@ -15,9 +15,9 @@ The Letter Avatar Generator is a Go application that creates personalized avatar
 
 ## Installation
 
-Ensure Go is installed on your system by downloading it from [the official Go website](https://golang.org/dl/).
+Ensure you have Go installed on your system by downloading it from [the official Go website](https://golang.org/dl/).
 
-Clone the repository to get started with the Letter Avatar Generator:
+Clone the repository to begin using the Letter Avatar Generator:
 
 ```bash
 git clone https://github.com/modevsty/go-letteravatar.git
@@ -38,19 +38,22 @@ Then run the following command:
 ```bash
 ./letteravatar
 ```
-The application will guide you through the following steps:
+The application will guide you through a series of prompts:
 
-1. Enter your first and last name.
-2. Pick a background color from the provided list by entering the corresponding number.
-3. Choose a shape for your avatar by selecting from the options provided.
-4. After these steps, the program generates an avatar based on your selections and saves it as a PNG file in the current directory.
+1. Enter Your Name: Input your first and last name only.
+2. Pick a Background Color: Choose from the list by entering the corresponding number.
+3. Pick a Shape: Select your preferred shape for the avatar.
+4. Pick a Save Format: Choose between PNG or JPG formats for your avatar.
+5. After these selections, the program generates your avatar according to your specifications and saves it in the current directory.
+
+
 
 ## Customizing Avatar
 The letteravatarapi allows for customization of the avatar's shape, size, and colors. Here are some methods you can use:
 
 - WithShape("circle" or "rectangle"): Defines the shape of the avatar.
 - WithSize(int): Sets the size of the avatar.
-- SetColor(background, foreground string): Sets the background and foreground colors.
+- WithColor(bgColorHex string): Sets the background color.
 
 These methods can be chained together when creating a new LetterAvatar instance.
 

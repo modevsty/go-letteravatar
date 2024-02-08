@@ -18,9 +18,11 @@ type LetterAvatar struct {
 
 func NewLetterAvatar(name string) *LetterAvatar {
 	return &LetterAvatar{
-		Name:  name,
-		Shape: "circle", // Default shape
-		Size:  250,      // Default size
+		Name:            name,
+		Shape:           "circle", // Default shape
+		Size:            250,      // Default size
+		BackgroundColor: "#0289d1",
+		ForegroundColor: "#fff",
 	}
 }
 
@@ -34,21 +36,14 @@ func (la *LetterAvatar) WithSize(size int) *LetterAvatar {
 	return la
 }
 
-func (la *LetterAvatar) SetColor(backgroundColor string, foregroundColor string) {
+func (la *LetterAvatar) WithColor(backgroundColor string, foregroundColor string) *LetterAvatar {
 	la.BackgroundColor = backgroundColor
 	la.ForegroundColor = foregroundColor
+	return la
 }
 
 func (la *LetterAvatar) Generate() image.Image {
 	dc := gg.NewContext(la.Size, la.Size)
-
-	// Default colors if not set
-	if la.BackgroundColor == "" {
-		la.BackgroundColor = "#0289d1"
-	}
-	if la.ForegroundColor == "" {
-		la.ForegroundColor = "#FFFFFF"
-	}
 
 	bgColor := la.BackgroundColor
 	fgColor := la.ForegroundColor
