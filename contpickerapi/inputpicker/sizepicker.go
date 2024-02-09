@@ -12,8 +12,9 @@ func (sp SizePicker) AskInput() (string, error) {
 	var sizeInput string
 	var size int
 	var err error
-	fmt.Println("Enter a size for the avatar between 16 and 1024:")
-	fmt.Scan(&sizeInput)
+	fmt.Print("Enter a size for the avatar between 16 and 1024:")
+	fmt.Scanln(&sizeInput)
+	fmt.Println()
 	size, err = strconv.Atoi(sizeInput)
 	if err != nil {
 		return "", fmt.Errorf("Invalid input: please enter a number")

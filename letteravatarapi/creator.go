@@ -5,6 +5,8 @@ import (
 	"image"
 	"strings"
 
+	"modevsty/go/letteravatar/contpickerapi"
+
 	"github.com/fogleman/gg"
 )
 
@@ -12,6 +14,7 @@ type LetterAvatar struct {
 	Name            string
 	Shape           string
 	Size            int
+	Format          string
 	BackgroundColor string
 	ForegroundColor string
 }
@@ -19,26 +22,52 @@ type LetterAvatar struct {
 func NewLetterAvatar(name string) *LetterAvatar {
 	return &LetterAvatar{
 		Name:            name,
-		Shape:           "circle", // Default shape
-		Size:            250,      // Default size
+		Shape:           "circle",
+		Size:            250,
 		BackgroundColor: "#0289d1",
 		ForegroundColor: "#fff",
+		Format:          "png",
 	}
 }
 
 func (la *LetterAvatar) WithShape(shape string) *LetterAvatar {
-	la.Shape = shape
+	if shape != "" {
+		la.Shape = shape
+	}
 	return la
 }
 
 func (la *LetterAvatar) WithSize(size int) *LetterAvatar {
-	la.Size = size
+	if size > 0 {
+		la.Size = size
+	}
 	return la
 }
 
 func (la *LetterAvatar) WithColor(backgroundColor string, foregroundColor string) *LetterAvatar {
-	la.BackgroundColor = backgroundColor
-	la.ForegroundColor = foregroundColor
+	if backgroundColor != "" {
+		la.BackgroundColor = backgroundColor
+	}
+	if foregroundColor != "" {
+		la.ForegroundColor = foregroundColor
+	}
+	return la
+}
+
+func (la *LetterAvatar) WithFormat(format string) *LetterAvatar {
+	if format != "" {
+		la.Format = format
+	}
+	return la
+}
+
+func NewLetterAvatarFromContPicker(contPicker *contpickerapi.ContPicker) *LetterAvatar {
+	la := NewLetterAvatar(contPicker.Name).
+		WithColor(contPicker.Bgcolor, "#fff").
+		WithShape(contPicker.Shape).
+		WithSize(contPicker.Size).
+		WithFormat(contPicker.Format)
+
 	return la
 }
 
@@ -72,13 +101,21 @@ func (la *LetterAvatar) Generate() image.Image {
 func (la *LetterAvatar) SaveAs(path string) error {
 	img := la.Generate()
 
-	// Determine format from path extension, default to PNG
 	if strings.HasSuffix(strings.ToLower(path), ".jpg") || strings.HasSuffix(strings.ToLower(path), ".jpeg") {
 		return gg.SaveJPG(path, img, 100)
 	} else if strings.HasSuffix(strings.ToLower(path), ".png") {
 		return gg.SavePNG(path, img)
 	}
 	return fmt.Errorf("Unsupported file format")
+}
+
+func (la *LetterAvatar) Save() {
+	savePath := fmt.Sprintf("%s.%s", strings.ToLower(strings.Join(strings.Fields(la.Name), "-")), la.Format)
+	if err := la.SaveAs(savePath); err != nil {
+		fmt.Printf("Error generating avatar: %v\n", err)
+	} else {
+		fmt.Printf("Avatar generated successfully at %s!\n", savePath)
+	}
 }
 
 func (la *LetterAvatar) getInitials(name string) string {

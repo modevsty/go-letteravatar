@@ -11,7 +11,8 @@ func (sp ShapePicker) AskInput() (string, error) {
 	fmt.Println("1. Circle")
 	fmt.Println("2. Square")
 	fmt.Print("Enter the number of the shape you want: ")
-	fmt.Scan(&shcode)
+	fmt.Scanln(&shcode)
+	fmt.Println()
 	switch shcode {
 	case "1":
 		shape = "circle"

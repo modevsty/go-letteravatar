@@ -14,7 +14,9 @@ func (cp ColorPicker) AskInput() (string, error) {
 	fmt.Println("2. Green")
 	fmt.Println("3. Blue")
 	fmt.Print("Enter the number of the color you want: ")
-	fmt.Scan(&bgcode)
+	fmt.Scanln(&bgcode)
+	fmt.Println()
+
 	switch bgcode {
 	case "1":
 		bgcolor = "#c2185c"

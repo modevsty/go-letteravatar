@@ -11,7 +11,8 @@ func (fp FormatPicker) AskInput() (string, error) {
 	fmt.Println("1. PNG")
 	fmt.Println("2. JPG")
 	fmt.Print("Enter the number of the format you want: ")
-	fmt.Scan(&fcode)
+	fmt.Scanln(&fcode)
+	fmt.Println()
 	switch fcode {
 	case "1":
 		format = "png"
